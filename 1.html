@@ -1,156 +1,215 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>404 - 钓鱼迷失页</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    background: linear-gradient(to top, #85c1e9 0%, #a3d4f7 70%, #eaf6ff 100%);
-    font-family: 'ZCOOL KuaiLe', cursive;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    color: #2a4d69;
-  }
-  .container {
-    position: relative;
-    text-align: center;
-  }
-  /* 鱼线 */
-  .fishline {
-    position: absolute;
-    top: -150px;
-    left: 50%;
-    width: 2px;
-    height: 180px;
-    background: #777;
-    transform-origin: top center;
-    animation: swing 3s ease-in-out infinite alternate;
-  }
-  /* 鱼漂 */
-  .float {
-    position: absolute;
-    top: 180px;
-    left: 50%;
-    width: 40px;
-    height: 60px;
-    background: linear-gradient(135deg, #e94f37 40%, #ffbc42 60%);
-    border-radius: 20px / 30px;
-    box-shadow: 0 0 8px #ffb347cc;
-    transform-origin: top center;
-    animation: floatupdown 4s ease-in-out infinite;
-    margin-left: -20px;
-  }
-  .float::before {
-    content: '';
-    position: absolute;
-    top: 6px; left: 12px;
-    width: 15px; height: 10px;
-    background: #fff;
-    border-radius: 8px 8px 0 0;
-    box-shadow: inset 0 0 4px #f0f0f0;
-  }
-  /* 404数字 */
-  .number404 {
-    margin-top: 120px;
-    font-size: 12vw;
-    font-weight: 900;
-    color: #1b3a57;
-    letter-spacing: 0.3em;
-    text-shadow: 2px 2px 6px #a6c8e1cc;
-    user-select: none;
-  }
-  /* 鱼 */
-  .fish {
-    position: absolute;
-    top: 40vh;
-    left: 15vw;
-    width: 120px;
-    height: 70px;
-    background: #3aafa9;
-    border-radius: 60% 40% 50% 50% / 60% 70% 30% 40%;
-    animation: swim 8s linear infinite;
-    box-shadow: inset -10px -4px 15px #278b8acc;
-  }
-  .fish::before {
-    content: '';
-    position: absolute;
-    top: 15px; left: 85px;
-    width: 50px; height: 40px;
-    background: #2b7a79;
-    border-radius: 50% 40% 40% 50% / 60% 70% 30% 40%;
-    transform: rotate(20deg);
-    box-shadow: inset 5px 2px 10px #1e5f5fcc;
-  }
-  .fish::after {
-    content: '';
-    position: absolute;
-    top: 25px; left: 10px;
-    width: 20px; height: 20px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: inset 3px 3px 6px #74d7d7;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 - 钓鱼小游戏</title>
 
-  /* 文案 */
-  .message {
-    margin-top: 40px;
-    font-size: 1.8rem;
-    font-weight: 600;
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  a.button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 40px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #fff;
-    background: #3aafa9;
-    border-radius: 30px;
-    text-decoration: none;
-    box-shadow: 0 0 15px #3aafa9cc;
-    transition: background-color 0.3s ease;
-  }
-  a.button:hover {
-    background: #2b7a79;
-  }
+  <!-- 
+    页面作者：rayjune
+    设计：钓鱼风格 404 页面 + HTML5 游戏
+    创建时间：2025
+    声明：本页面由 rayjune 制作，仅作趣味展示用途。
+  -->
 
-  /* 动画 */
-  @keyframes swing {
-    0% {transform: rotate(-12deg);}
-    100% {transform: rotate(12deg);}
-  }
-  @keyframes floatupdown {
-    0%, 100% {transform: translateY(0) rotate(-6deg);}
-    50% {transform: translateY(8px) rotate(6deg);}
-  }
-  @keyframes swim {
-    0% {left: -15vw;}
-    100% {left: 110vw;}
-  }
-
-</style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+    body,html {
+      margin:0; padding:0; height:100%;
+      background: linear-gradient(to top, #85c1e9 0%, #a3d4f7 70%, #eaf6ff 100%);
+      font-family: 'ZCOOL KuaiLe', cursive;
+      color: #2a4d69;
+      user-select:none;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction: column;
+    }
+    h1 {
+      font-size: 12vw;
+      margin: 0;
+      letter-spacing: 0.3em;
+      text-shadow: 2px 2px 6px #a6c8e1cc;
+    }
+    .message {
+      font-size: 1.8rem;
+      max-width: 320px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #gameArea {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      background: linear-gradient(to bottom, #c2f0fc 0%, #64c8f5 100%);
+      border-radius: 20px;
+      box-shadow: inset 0 0 40px #a0d7ff;
+      overflow: hidden;
+    }
+    #rod {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 8px;
+      height: 180px;
+      background: #6b4f33;
+      border-radius: 4px;
+      transform-origin: bottom center;
+      transform: translateX(-50%) rotate(0deg);
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 0 8px #4d3b27;
+    }
+    #line {
+      position: absolute;
+      left: 50%;
+      bottom: 180px;
+      width: 2px;
+      height: 140px;
+      background: #a9a9a9;
+      transform-origin: top center;
+      transform: translateX(-50%);
+    }
+    #hook {
+      position: absolute;
+      left: 50%;
+      bottom: 320px;
+      width: 20px;
+      height: 30px;
+      border: 3px solid #555;
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      background: #ccc;
+      transform: translateX(-50%);
+      box-shadow: 0 0 6px #999;
+    }
+    #fish {
+      position: absolute;
+      width: 100px;
+      height: 50px;
+      background: #3aafa9;
+      border-radius: 50% / 60%;
+      top: 150px;
+      left: -100px;
+      box-shadow: inset -10px -5px 15px #278b8a;
+      transition: left 3s linear;
+    }
+    #fish::before {
+      content: '';
+      position: absolute;
+      top: 12px; left: 70px;
+      width: 40px; height: 30px;
+      background: #2b7a79;
+      border-radius: 50% / 60%;
+      transform: rotate(20deg);
+      box-shadow: inset 5px 3px 10px #1e5f5f;
+    }
+    #fish::after {
+      content: '';
+      position: absolute;
+      top: 20px; left: 15px;
+      width: 15px; height: 15px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: inset 3px 3px 6px #74d7d7;
+    }
+    #btnCast {
+      margin-top: 30px;
+      padding: 12px 50px;
+      background: #3aafa9;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #3aafa9cc;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    #btnCast:hover {
+      background: #2b7a79;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #0a4a52;
+      min-height: 32px;
+      height: 32px;
+      user-select:none;
+    }
+    a.buttonHome {
+      margin-top: 30px;
+      text-decoration: none;
+      color: #fff;
+      background: #f66;
+      padding: 12px 40px;
+      border-radius: 30px;
+      font-weight: 700;
+      box-shadow: 0 0 15px #f66a6acc;
+      display: inline-block;
+    }
+    a.buttonHome:hover {
+      background: #cc5252;
+    }
+  </style>
 </head>
 <body>
-<div class="container" aria-label="404 钓鱼页面">
-  <div class="fishline"></div>
-  <div class="float"></div>
-  <div class="number404">404</div>
-  <div class="fish" aria-hidden="true"></div>
-  <div class="message">
-    哎呀，钓鱼时钓到了404！<br>
-    你钓的页面不存在，换个地方继续钓吧~
-  </div>
-  <a href="/" class="button" role="button">返回首页</a>
+
+<h1>404</h1>
+<div class="message">钓鱼游戏中没钓到页面，换个地方继续钓吧！</div>
+
+<div id="gameArea" aria-label="钓鱼小游戏">
+  <div id="rod"></div>
+  <div id="line"></div>
+  <div id="hook"></div>
+  <div id="fish"></div>
 </div>
+
+<button id="btnCast" aria-label="抛竿钓鱼">抛竿钓鱼 🎣</button>
+
+<div id="result" role="status" aria-live="polite"></div>
+
+<a href="/" class="buttonHome" role="button">返回首页</a>
+
+<!-- 隐藏作者信息 -->
+<!-- 制作者：rayjune | 项目：404钓鱼游戏页面 | 年份：2025 -->
+
+<script>
+  const rod = document.getElementById('rod');
+  const fish = document.getElementById('fish');
+  const btnCast = document.getElementById('btnCast');
+  const result = document.getElementById('result');
+
+  fish.style.left = '-120px';
+
+  btnCast.addEventListener('click', () => {
+    btnCast.disabled = true;
+    result.textContent = '正在抛竿...';
+
+    rod.style.transform = 'translateX(-50%) rotate(-60deg)';
+
+    setTimeout(() => {
+      rod.style.transform = 'translateX(-50%) rotate(0deg)';
+      result.textContent = '钓线入水，等待咬钩...';
+
+      let wait = Math.random() * 2000 + 1000;
+
+      setTimeout(() => {
+        if (Math.random() < 0.5) {
+          fish.style.left = '110%';
+          result.textContent = '咬钩了！你钓到了一条大鱼！🎉';
+          setTimeout(() => {
+            fish.style.left = '-120px';
+            btnCast.disabled = false;
+            result.textContent = '你可以继续钓鱼或者返回首页。';
+          }, 4000);
+        } else {
+          result.textContent = '什么都没钓到，换个地方再试试吧~';
+          btnCast.disabled = false;
+        }
+      }, wait);
+    }, 800);
+  });
+</script>
+
 </body>
 </html>
