@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>钓鱼失败 - 404</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    作者：rayjune
+    风格：钓鱼指挥台 + 异常扫描终端风格404页面
+    说明：创意钓鱼页面，不展示任何页面作者信息，保留于源码中
+  -->
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #33ff99;
+      font-family: "Courier New", Courier, monospace;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .terminal {
+      background: #000;
+      padding: 30px;
+      border: 1px solid #33ff99;
+      width: 90%;
+      max-width: 600px;
+      min-height: 300px;
+      box-shadow: 0 0 20px #33ff99;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .terminal::before {
+      content: "钓鱼指挥终端 v4.04";
+      position: absolute;
+      top: -25px;
+      left: 10px;
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    .line {
+      margin: 5px 0;
+      white-space: pre;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #33ff99;
+      animation: blink 1s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .btn {
+      margin-top: 20px;
+      background: #33ff99;
+      color: #000;
+      border: none;
+      padding: 10px 30px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #44ffaa;
+    }
+
+    a {
+      color: #33ff99;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="terminal" id="terminal">
+  <div class="line">[系统] 正在初始化钓鱼扫描模块...</div>
+</div>
+
+<button class="btn" onclick="restart()">重新扫描</button>
+
+<script>
+  const lines = [
+    "[✓] 雷达启动成功...",
+    "[*] 正在扫描水域坐标...",
+    "[!] 鱼群信号增强中...",
+    "[✓] 一条异常大鱼出现在坐标 X:404 / Y:NotFound",
+    "[*] 正在抛钩钓取目标...",
+    "[✖] 钓上来的是：404 错误页面（该鱼不存在）",
+    "[💡] 建议返回 <a href='/'>主页</a> 或换个钓场。"
+  ];
+
+  let i = 0;
+  const term = document.getElementById("terminal");
+
+  function showNextLine() {
+    if (i < lines.length) {
+      const div = document.createElement("div");
+      div.className = "line";
+      div.innerHTML = lines[i];
+      term.appendChild(div);
+      i++;
+      setTimeout(showNextLine, 1200);
+    } else {
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      term.appendChild(cursor);
+    }
+  }
+
+  setTimeout(showNextLine, 1200);
+
+  function restart() {
+    term.innerHTML = '<div class="line">[系统] 正在初始化钓鱼扫描模块...</div>';
+    i = 0;
+    setTimeout(showNextLine, 1200);
+  }
+</script>
+
+</body>
+</html>
