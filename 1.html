@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <!-- 页面字符编码 -->
   <meta charset="UTF-8" />
+  <!-- 视口设置，适配各种设备屏幕 -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 页面标题 -->
   <title>404 - 钓鱼小游戏</title>
 
   <!-- 
@@ -13,86 +16,107 @@
   -->
 
   <style>
+    /* 引入谷歌字体：ZCOOL KuaiLe，手写卡通风 */
     @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+
+    /* 页面和html的基础样式，清除默认边距，100%高 */
     body,html {
       margin:0; padding:0; height:100%;
+      /* 背景采用蓝色渐变，模拟天空和水面 */
       background: linear-gradient(to top, #85c1e9 0%, #a3d4f7 70%, #eaf6ff 100%);
-      font-family: 'ZCOOL KuaiLe', cursive;
-      color: #2a4d69;
-      user-select:none;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex-direction: column;
+      font-family: 'ZCOOL KuaiLe', cursive; /* 可爱手写字体 */
+      color: #2a4d69; /* 深蓝色文字 */
+      user-select:none; /* 禁止选中文字 */
+      display:flex; /* flex布局 */
+      justify-content:center; /* 水平居中 */
+      align-items:center; /* 垂直居中 */
+      flex-direction: column; /* 纵向排列 */
     }
+
+    /* 404主标题样式 */
     h1 {
-      font-size: 12vw;
-      margin: 0;
-      letter-spacing: 0.3em;
-      text-shadow: 2px 2px 6px #a6c8e1cc;
+      font-size: 12vw; /* 字体大小随屏幕宽度变化 */
+      margin: 0; /* 去除默认上下边距 */
+      letter-spacing: 0.3em; /* 字符间距加宽 */
+      text-shadow: 2px 2px 6px #a6c8e1cc; /* 文字阴影，增加立体感 */
     }
+
+    /* 信息提示文字 */
     .message {
-      font-size: 1.8rem;
-      max-width: 320px;
-      text-align: center;
-      margin-bottom: 20px;
+      font-size: 1.8rem; /* 较大字体 */
+      max-width: 320px; /* 最大宽度 */
+      text-align: center; /* 文字居中 */
+      margin-bottom: 20px; /* 下边距 */
     }
+
+    /* 钓鱼游戏区域容器 */
     #gameArea {
-      position: relative;
+      position: relative; /* 绝对定位子元素参考 */
       width: 320px;
       height: 320px;
+      /* 背景色渐变，模拟水面 */
       background: linear-gradient(to bottom, #c2f0fc 0%, #64c8f5 100%);
-      border-radius: 20px;
-      box-shadow: inset 0 0 40px #a0d7ff;
-      overflow: hidden;
+      border-radius: 20px; /* 圆角 */
+      box-shadow: inset 0 0 40px #a0d7ff; /* 内阴影模拟水面 */
+      overflow: hidden; /* 超出隐藏 */
     }
+
+    /* 钓竿样式 */
     #rod {
       position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 8px;
-      height: 180px;
-      background: #6b4f33;
-      border-radius: 4px;
-      transform-origin: bottom center;
-      transform: translateX(-50%) rotate(0deg);
-      transition: transform 0.3s ease-in-out;
-      box-shadow: 0 0 8px #4d3b27;
+      left: 50%; /* 水平居中 */
+      bottom: 0; /* 底部对齐 */
+      width: 8px; /* 宽度 */
+      height: 180px; /* 高度 */
+      background: #6b4f33; /* 棕色 */
+      border-radius: 4px; /* 圆角 */
+      transform-origin: bottom center; /* 旋转中心：底部中央 */
+      transform: translateX(-50%) rotate(0deg); /* 初始位置，水平居中，旋转0度 */
+      transition: transform 0.3s ease-in-out; /* 旋转动画 */
+      box-shadow: 0 0 8px #4d3b27; /* 阴影 */
     }
+
+    /* 钓线样式 */
     #line {
       position: absolute;
-      left: 50%;
-      bottom: 180px;
+      left: 50%; /* 居中 */
+      bottom: 180px; /* 在钓竿顶部 */
       width: 2px;
       height: 140px;
-      background: #a9a9a9;
+      background: #a9a9a9; /* 灰色钓线 */
       transform-origin: top center;
       transform: translateX(-50%);
     }
+
+    /* 钓钩样式 */
     #hook {
       position: absolute;
       left: 50%;
-      bottom: 320px;
+      bottom: 320px; /* 在钓线末端 */
       width: 20px;
       height: 30px;
-      border: 3px solid #555;
-      border-left: none;
-      border-radius: 0 20px 20px 0;
-      background: #ccc;
+      border: 3px solid #555; /* 边框颜色 */
+      border-left: none; /* 左边无边框 */
+      border-radius: 0 20px 20px 0; /* 右侧圆角 */
+      background: #ccc; /* 灰色 */
       transform: translateX(-50%);
       box-shadow: 0 0 6px #999;
     }
+
+    /* 小鱼样式 */
     #fish {
       position: absolute;
       width: 100px;
       height: 50px;
-      background: #3aafa9;
-      border-radius: 50% / 60%;
-      top: 150px;
-      left: -100px;
-      box-shadow: inset -10px -5px 15px #278b8a;
-      transition: left 3s linear;
+      background: #3aafa9; /* 青绿色 */
+      border-radius: 50% / 60%; /* 椭圆形 */
+      top: 150px; /* 垂直位置 */
+      left: -100px; /* 初始在左侧视口外 */
+      box-shadow: inset -10px -5px 15px #278b8a; /* 内阴影，做鱼鳞效果 */
+      transition: left 3s linear; /* 左移动画 */
     }
+
+    /* 鱼身体装饰 - 鳍 */
     #fish::before {
       content: '';
       position: absolute;
@@ -103,6 +127,8 @@
       transform: rotate(20deg);
       box-shadow: inset 5px 3px 10px #1e5f5f;
     }
+
+    /* 鱼眼睛 */
     #fish::after {
       content: '';
       position: absolute;
@@ -112,10 +138,12 @@
       border-radius: 50%;
       box-shadow: inset 3px 3px 6px #74d7d7;
     }
+
+    /* 抛竿按钮样式 */
     #btnCast {
       margin-top: 30px;
       padding: 12px 50px;
-      background: #3aafa9;
+      background: #3aafa9; /* 按钮颜色 */
       color: white;
       font-weight: 700;
       font-size: 1.2rem;
@@ -124,18 +152,25 @@
       box-shadow: 0 0 15px #3aafa9cc;
       border: none;
       transition: background-color 0.3s ease;
+      user-select: none; /* 禁止选中 */
     }
+
+    /* 按钮悬停颜色变暗 */
     #btnCast:hover {
       background: #2b7a79;
     }
+
+    /* 钓鱼结果文字 */
     #result {
       margin-top: 20px;
       font-size: 1.4rem;
       color: #0a4a52;
-      min-height: 32px;
+      min-height: 32px; /* 固定高度避免跳动 */
       height: 32px;
-      user-select:none;
+      user-select:none; /* 禁止选中 */
     }
+
+    /* 返回首页按钮样式 */
     a.buttonHome {
       margin-top: 30px;
       text-decoration: none;
@@ -146,7 +181,10 @@
       font-weight: 700;
       box-shadow: 0 0 15px #f66a6acc;
       display: inline-block;
+      user-select:none;
     }
+
+    /* 返回首页按钮悬停效果 */
     a.buttonHome:hover {
       background: #cc5252;
     }
@@ -154,62 +192,79 @@
 </head>
 <body>
 
-<h1>404</h1>
-<div class="message">钓鱼游戏中没钓到页面，换个地方继续钓吧！</div>
+  <!-- 主标题 -->
+  <h1>404</h1>
+  <!-- 页面提示信息 -->
+  <div class="message">钓鱼游戏中没钓到页面，换个地方继续钓吧！</div>
 
-<div id="gameArea" aria-label="钓鱼小游戏">
-  <div id="rod"></div>
-  <div id="line"></div>
-  <div id="hook"></div>
-  <div id="fish"></div>
-</div>
+  <!-- 钓鱼游戏区域 -->
+  <div id="gameArea" aria-label="钓鱼小游戏">
+    <div id="rod"></div> <!-- 钓竿 -->
+    <div id="line"></div> <!-- 钓线 -->
+    <div id="hook"></div> <!-- 钓钩 -->
+    <div id="fish"></div> <!-- 小鱼 -->
+  </div>
 
-<button id="btnCast" aria-label="抛竿钓鱼">抛竿钓鱼 🎣</button>
+  <!-- 抛竿按钮 -->
+  <button id="btnCast" aria-label="抛竿钓鱼">抛竿钓鱼 🎣</button>
 
-<div id="result" role="status" aria-live="polite"></div>
+  <!-- 钓鱼结果显示 -->
+  <div id="result" role="status" aria-live="polite"></div>
 
-<a href="/" class="buttonHome" role="button">返回首页</a>
+  <!-- 返回首页按钮 -->
+  <a href="/2.html" class="buttonHome" role="button">下一页</a>
 
-<!-- 隐藏作者信息 -->
-<!-- 制作者：rayjune | 项目：404钓鱼游戏页面 | 年份：2025 -->
+  <!-- 作者信息隐藏于代码注释中 -->
+  <!-- 制作者：rayjune | 项目：404钓鱼游戏页面 | 年份：2025 -->
 
-<script>
-  const rod = document.getElementById('rod');
-  const fish = document.getElementById('fish');
-  const btnCast = document.getElementById('btnCast');
-  const result = document.getElementById('result');
+  <script>
+    // 获取元素引用
+    const rod = document.getElementById('rod');
+    const fish = document.getElementById('fish');
+    const btnCast = document.getElementById('btnCast');
+    const result = document.getElementById('result');
 
-  fish.style.left = '-120px';
+    // 初始鱼的位置，屏幕左侧外
+    fish.style.left = '-120px';
 
-  btnCast.addEventListener('click', () => {
-    btnCast.disabled = true;
-    result.textContent = '正在抛竿...';
+    // 点击“抛竿钓鱼”按钮触发事件
+    btnCast.addEventListener('click', () => {
+      btnCast.disabled = true; // 禁用按钮防止重复点击
+      result.textContent = '正在抛竿...'; // 显示抛竿中提示
 
-    rod.style.transform = 'translateX(-50%) rotate(-60deg)';
+      // 钓竿旋转，模拟抛竿动作
+      rod.style.transform = 'translateX(-50%) rotate(-60deg)';
 
-    setTimeout(() => {
-      rod.style.transform = 'translateX(-50%) rotate(0deg)';
-      result.textContent = '钓线入水，等待咬钩...';
-
-      let wait = Math.random() * 2000 + 1000;
-
+      // 0.8秒后，钓竿复位，进入等待咬钩状态
       setTimeout(() => {
-        if (Math.random() < 0.5) {
-          fish.style.left = '110%';
-          result.textContent = '咬钩了！你钓到了一条大鱼！🎉';
-          setTimeout(() => {
-            fish.style.left = '-120px';
+        rod.style.transform = 'translateX(-50%) rotate(0deg)';
+        result.textContent = '钓线入水，等待咬钩...';
+
+        // 模拟等待时间，1~3秒之间随机
+        let wait = Math.random() * 2000 + 1000;
+
+        setTimeout(() => {
+          // 50%概率钓到鱼
+          if (Math.random() < 0.5) {
+            // 鱼游过屏幕右边，模拟被钓起
+            fish.style.left = '110%';
+            result.textContent = '咬钩了！你钓到了一条大鱼！🎉';
+
+            // 4秒后鱼返回起始点，按钮恢复可用
+            setTimeout(() => {
+              fish.style.left = '-120px';
+              btnCast.disabled = false;
+              result.textContent = '你可以继续钓鱼或者返回首页。';
+            }, 4000);
+          } else {
+            // 未钓到鱼，提示并恢复按钮
+            result.textContent = '什么都没钓到，换个地方再试试吧~';
             btnCast.disabled = false;
-            result.textContent = '你可以继续钓鱼或者返回首页。';
-          }, 4000);
-        } else {
-          result.textContent = '什么都没钓到，换个地方再试试吧~';
-          btnCast.disabled = false;
-        }
-      }, wait);
-    }, 800);
-  });
-</script>
+          }
+        }, wait);
+      }, 800);
+    });
+  </script>
 
 </body>
 </html>
