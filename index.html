@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <!-- 页面字符编码为UTF-8 -->
   <meta charset="UTF-8" />
-  <title>首页跳转示例</title>
+  <!-- 页面标题 -->
+  <title>404 - 页面未找到</title>
+  <!-- 视口设置，适配移动端 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* 页面整体样式 */
     body {
-      font-family: "微软雅黑", sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      margin: 0;
-      justify-content: center;
-      align-items: center;
-      background: #f0f8ff;
+      margin: 0; /* 取消默认边距 */
+      background: #121212; /* 深色背景 */
+      color: #f0f0f0; /* 文字颜色为浅灰 */
+      font-family: "微软雅黑", Arial, sans-serif; /* 字体设置 */
+      display: flex; /* 使用flex布局 */
+      flex-direction: column; /* 纵向排列 */
+      justify-content: center; /* 垂直居中 */
+      align-items: center; /* 水平居中 */
+      height: 100vh; /* 高度占满整个视口 */
+      text-align: center; /* 文字居中 */
+      padding: 0 20px; /* 左右内边距 */
     }
+
+    /* 404数字样式 */
     h1 {
-      margin-bottom: 40px;
-      color: #333;
+      font-size: 6rem; /* 大字号 */
+      margin: 0; /* 取消默认外边距 */
+      color: #ff4c4c; /* 红色字体 */
+      text-shadow: 0 0 10px #ff4c4c; /* 红色光晕效果 */
     }
+
+    /* 描述文字样式 */
+    p {
+      font-size: 1.5rem; /* 字号 */
+      margin: 20px 0 50px; /* 上20px，下50px */
+      max-width: 600px; /* 最大宽度 */
+      line-height: 1.6; /* 行高 */
+      color: #ccc; /* 浅灰文字 */
+    }
+
+    /* 按钮样式 */
     button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background: #3399ff;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(51,153,255,0.4);
-      transition: background-color 0.3s ease;
+      padding: 15px 40px; /* 内边距 */
+      font-size: 1.2rem; /* 字号 */
+      border: none; /* 无边框 */
+      border-radius: 30px; /* 圆角按钮 */
+      background: linear-gradient(90deg, #ff416c, #ff4b2b); /* 渐变背景色 */
+      color: white; /* 白色文字 */
+      cursor: pointer; /* 鼠标悬停为指针 */
+      box-shadow: 0 5px 15px rgba(255, 75, 43, 0.6); /* 投影 */
+      transition: background 0.3s ease; /* 背景颜色过渡 */
     }
+
+    /* 按钮悬停效果 */
     button:hover {
-      background: #267acc;
+      background: linear-gradient(90deg, #ff4b2b, #ff416c); /* 渐变方向反转 */
     }
   </style>
 </head>
 <body>
-  <h1>欢迎来到首页</h1>
-  <button id="nextPageBtn">跳转到下一个页面</button>
-
-  <script>
-    let currentPage = 1;
-    const maxPage = 5; // 假设你有 1.html 到 5.html 共5个页面
-
-    document.getElementById('nextPageBtn').addEventListener('click', () => {
-      window.location.href = currentPage + '.html';
-      currentPage++;
-      if (currentPage > maxPage) {
-        currentPage = 1; // 循环回第1页
-      }
-    });
-  </script>
+  <!-- 404大标题 -->
+  <h1>404</h1>
+  <!-- 页面说明文字 -->
+  <p>抱歉，你访问的页面不存在或已被移除。请点击下面的按钮，返回我们的精彩内容页面。</p>
+  <!-- 跳转按钮，点击后跳转到 /1.html -->
+  <button onclick="location.href='/1.html'">前往精彩内容</button>
 </body>
 </html>
